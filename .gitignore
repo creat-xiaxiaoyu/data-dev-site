@@ -1,0 +1,13 @@
+# 部署时无需上传的临时文件
+/.workbuddy/
+/cf-deploy.zip
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器临时
+.vscode/
+.idea/
+*.swp
+*~

@@ -1,0 +1,11 @@
+# 数智化团队 · 数据服务站
+# https://data-dev-site.app.workbuddy.host/
+
+User-agent: *
+Allow: /
+
+# 搜索引擎 sitemap
+Sitemap: https://data-dev-site.app.workbuddy.host/sitemap.xml
+
+# 爬取频率（不压服务器）
+Crawl-delay: 1

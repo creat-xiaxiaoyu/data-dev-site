@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a5fb8">
+
+<title>数据中台 · BI 驾驶舱 · ChatBI 问数 | 数智化团队</title>
+<meta name="description" content="数智化团队 - 多年深入业务一线，专做企业数据自动化与 AI 自然语言问数。让数据自动流转、自动计算，老板一句话问数即得。">
+<meta name="keywords" content="数据中台,BI驾驶舱,ChatBI,数据自动化,ETL,数据开发,数仓,Doris,AI问数,大屏,移动端报表,损益模型,多维分析">
+<meta name="author" content="韩逢雨 - 数智化团队">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://data-dev-site.app.workbuddy.host/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="数智化团队 | 让数据真正驱动经营决策">
+<meta property="og:description" content="数据自动流转、自动计算；AI 一句话问数即得。多年深入业务一线的实战经验。">
+<meta property="og:url" content="https://data-dev-site.app.workbuddy.host/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "数智化团队",
+  "description": "企业数据自动化、BI 驾驶舱、ChatBI 自然语言问数服务",
+  "url": "https://data-dev-site.app.workbuddy.host/",
+  "provider": {"@type":"Person","name":"韩逢雨","jobTitle":"数据总监"},
+  "areaServed": "CN",
+  "serviceType": ["数据中台", "BI 驾驶舱", "ChatBI 问数", "ETL", "AI 智能体"],
+  "knowsAbout": ["数据仓库", "ETL", "Doris", "DolphinScheduler", "ChatBI", "BI 驾驶舱", "数据建模"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"你们能做什么？","acceptedAnswer":{"@type":"Answer","text":"两大核心能力：1) 数据自动化（自动流转、自动计算，省去人工倒腾Excel）；2) AI 自然语言问数（ChatBI），老板一句话问数即得答案。"}},
+    {"@type":"Question","name":"数据自动化具体指什么？","acceptedAnswer":{"@type":"Answer","text":"从业务系统自动 ETL 抽取、清洗、计算，凌晨跑完，8 点前报表就绪。告别人工下载 Excel 拼表对数。"}},
+    {"@type":"Question","name":"ChatBI 怎么问数？","acceptedAnswer":{"@type":"Answer","text":"在钉钉/企微/飞书里直接打字问，比如'上周华东外卖下滑多少'，30 秒内出图表+结论。"}},
+    {"@type":"Question","name":"服务报价？","acceptedAnswer":{"@type":"Answer","text":"单业务系统接入1.5万起；完整数据中台8万起；ChatBI智能体3万起。"}}
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a5fb8'/%3E%3Cpath d='M8 20 L14 14 L18 18 L24 12' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='24' cy='12' r='2' fill='white'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#hero" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 32 32" width="28" height="28"><rect width="32" height="32" rx="6" fill="#1a5fb8"/><path d="M8 20 L14 14 L18 18 L24 12" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="12" r="2" fill="white"/></svg>
+      </span>
+      <span class="logo-text">数智化团队<span class="logo-sub">· 数据服务</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#hero" class="nav-top">数智化</a>
+      <a href="#pain">行业痛点</a>
+      <a href="#value">我们能做什么</a>
+      <a href="#cases">案例展示</a>
+      <a href="#ai-demo">ChatBI 演示</a>
+      <a href="#contact" class="nav-cta">免费咨询</a>
+    </nav>
+    <button class="nav-toggle" aria-label="菜单" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============== 1. Hero ============== -->
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <svg class="hero-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#1a5fb8" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#1a5fb8" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,160 L60,140 L120,150 L180,110 L240,120 L300,80 L360,90 L420,50 L480,60 L540,30 L600,40 L600,200 L0,200 Z" fill="url(#g1)"/>
+      <path d="M0,160 L60,140 L120,150 L180,110 L240,120 L300,80 L360,90 L420,50 L480,60 L540,30 L600,40" stroke="#1a5fb8" stroke-width="2" fill="none" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow reveal" data-reveal>数据中台 · BI 驾驶舱 · ChatBI · AI 智能体</span>
+      <h1 class="hero-title reveal" data-reveal>让数据<em>真正驱动</em>经营决策</h1>
+      <p class="hero-sub reveal" data-reveal>
+        多年深入业务一线，拥有丰富的<strong>数据开发实战经验</strong><br>
+        专做企业 <strong>数据自动化</strong> 与 <strong>AI 自然语言问数</strong>，让报表自动出、让问数像说话一样简单
+      </p>
+      <div class="hero-actions reveal" data-reveal>
+        <a href="#cases" class="btn btn-primary">看真实案例 <span aria-hidden="true">→</span></a>
+        <a href="#ai-demo" class="btn btn-ghost">▶ 体验 ChatBI 问数</a>
+        <a href="#contact" class="btn btn-link">免费咨询方案</a>
+      </div>
+    </div>
+
+    <div class="hero-side reveal" data-reveal>
+      <div class="hero-stats">
+        <div class="hs-item">
+          <div class="hs-num">实战派</div>
+          <div class="hs-label">多年业务一线数据开发</div>
+        </div>
+        <div class="hs-item">
+          <div class="hs-num">2<span class="hs-unit">大核心</span></div>
+          <div class="hs-label">数据自动化 + AI 问数</div>
+        </div>
+        <div class="hs-item">
+          <div class="hs-num">T+0</div>
+          <div class="hs-label">凌晨跑完，8 点就绪</div>
+        </div>
+        <div class="hs-item">
+          <div class="hs-num">30<span class="hs-unit">秒</span></div>
+          <div class="hs-label">ChatBI 一句话出答案</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 服务行业 -->
+<section class="section industries">
+  <div class="container">
+    <div class="ind-head reveal" data-reveal>
+      <span class="ind-title">正在服务 / 已交付行业</span>
+      <span class="ind-sub">覆盖多行业的数据自动化与 AI 分析落地</span>
+    </div>
+    <div class="ind-grid">
+      <div class="ind-card"><span class="ind-emoji">🍜</span><span class="ind-name">餐饮连锁</span></div>
+      <div class="ind-card"><span class="ind-emoji">🍱</span><span class="ind-name">团餐 · 校餐</span></div>
+      <div class="ind-card"><span class="ind-emoji">🛒</span><span class="ind-name">零售连锁</span></div>
+      <div class="ind-card"><span class="ind-emoji">🏭</span><span class="ind-name">制造业</span></div>
+      <div class="ind-card"><span class="ind-emoji">🏥</span><span class="ind-name">医疗行业</span></div>
+      <div class="ind-card"><span class="ind-emoji">📚</span><span class="ind-name">教育培训</span></div>
+      <div class="ind-card"><span class="ind-emoji">💼</span><span class="ind-name">专业服务</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 2. 行业痛点 ============== -->
+<section class="section" id="pain">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <span class="kicker">行业痛点</span>
+      <h2 class="section-title">企业用数据，普遍卡在这 3 件事</h2>
+      <p class="section-lead">随着业务增长、系统增多，传统"手工取数、人工分析"的方式越来越跟不上</p>
+    </div>
+    <div class="pain-grid pain-grid-lg">
+      <!-- 痛点 1：手工倒 Excel -->
+      <article class="pain-card pain-card-lg reveal" data-reveal>
+        <div class="pain-top">
+          <div class="pain-icon">📑</div>
+          <div>
+            <h3>想看业务数据，全靠手工倒 Excel</h3>
+            <span class="pain-scene">要看经营数据，只能安排员工到各系统导表、回来拼汇总。</span>
+          </div>
+        </div>
+        <ul class="pain-cons">
+          <li>耗时耗力，一次汇总动辄 <strong>3-5 天</strong>，数据拿到早已过时</li>
+          <li>口径一改，所有表格推倒重做；版本一多，分不清哪份准</li>
+          <li>人工复制粘贴，<strong>易错漏</strong>，对数时各部门互相扯皮</li>
+          <li>员工被低价值重复劳动占满，无暇做真正的分析</li>
+        </ul>
+        <div class="pain-stat">3-5 天<span>/ 一次月结汇总</span></div>
+      </article>
+
+      <!-- 痛点 2：问数要等 -->
+      <article class="pain-card pain-card-lg reveal" data-reveal>
+        <div class="pain-top">
+          <div class="pain-icon">⏳</div>
+          <div>
+            <h3>有些数取不到，问数只能等</h3>
+            <span class="pain-scene">有些数据导表根本取不到，只能提给数据开发排期等。</span>
+          </div>
+        </div>
+        <ul class="pain-cons">
+          <li>业务一问数就要<strong>提需求、排期</strong>，快则半天、慢则数日</li>
+          <li>临时、交叉、多变的问题，等不及，决策只能凭经验</li>
+          <li>数据开发疲于应付取数，<strong>核心建设反而被挤压</strong></li>
+          <li>问题一多，需求大量积压，响应越来越慢</li>
+        </ul>
+        <div class="pain-stat">半天起<span>/ 提一次数</span></div>
+      </article>
+
+      <!-- 痛点 3：口径不一、孤岛 -->
+      <article class="pain-card pain-card-lg reveal" data-reveal>
+        <div class="pain-top">
+          <div class="pain-icon">🧩</div>
+          <div>
+            <h3>数据口径不一，撑不起多维分析</h3>
+            <span class="pain-scene">各系统各说各话，同名指标对不上，跨系统没法联查。</span>
+          </div>
+        </div>
+        <ul class="pain-cons">
+          <li>同一指标多个版本，开会先花时间<strong>争论谁的数准</strong></li>
+          <li>跨系统不能联合查询，<strong>多维 / 关联分析做不了</strong></li>
+          <li>数据散在各系统，无法沉淀为统一可信的数据资产</li>
+          <li>日益增长的经营分析需求，现有方式<strong>难以支撑</strong></li>
+        </ul>
+        <div class="pain-stat">多套口径<span>/ 无法联合分析</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 3. 我们能做什么（数据基座 → AI 问数） ============== -->
+<section class="section section-alt" id="value">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <span class="kicker">我们能做什么</span>
+      <h2 class="section-title">先有数据基座，再有 AI 问数</h2>
+      <p class="section-lead">两步走：把散落的数据自动化汇聚成一个数据湖，然后在上面用 AI 一句话问数</p>
+    </div>
+
+    <div class="value-stack">
+      <!-- 第一步：数据基座 -->
+      <article class="value-stage reveal" data-reveal>
+        <div class="vs-head">
+          <span class="vs-step">STEP 1</span>
+          <h3>数据基座 · 数据自动化</h3>
+          <p class="vs-sub">5 套业务系统的数据自动流转、清洗、汇聚，形成统一数据湖</p>
+        </div>
+
+        <!-- ETL 流转链路：业务系统 → ETL 工作流 → 数据仓库/数据湖 → 应用 -->
+        <div class="etl-flow" aria-hidden="true">
+          <!-- 5 个业务系统 -->
+          <div class="etl-sources">
+            <span class="src-node" style="--i:0">POS</span>
+            <span class="src-node" style="--i:1">ERP</span>
+            <span class="src-node" style="--i:2">OA</span>
+            <span class="src-node" style="--i:3">CRM</span>
+            <span class="src-node" style="--i:4">财务</span>
+          </div>
+
+          <!-- 汇聚曲线：5 条斜线汇入 ETL 工作流 -->
+          <div class="etl-linkset">
+            <svg viewBox="0 0 90 264" preserveAspectRatio="none">
+              <path class="ln" style="--d:0s"   d="M2,22 C48,22 56,124 88,132" />
+              <path class="ln" style="--d:.25s" d="M2,77 C48,77 60,130 88,132" />
+              <path class="ln" style="--d:.5s"  d="M2,132 C50,132 62,132 88,132" />
+              <path class="ln" style="--d:.75s" d="M2,187 C48,187 60,134 88,132" />
+              <path class="ln" style="--d:1s"   d="M2,242 C48,242 56,140 88,132" />
+            </svg>
+          </div>
+
+          <!-- ETL 工作流（链路中一环） -->
+          <div class="etl-pipeline">
+            <span class="pl-gear">⚙️</span>
+            <span class="pl-title">ETL 工作流</span>
+            <span class="pl-sub">抽取 · 清洗 · 加载</span>
+            <span class="pl-sched">⏰ 每日自动调度</span>
+          </div>
+
+          <!-- 连线：ETL → 数据仓库 -->
+          <div class="etl-linkset etl-linkset-out">
+            <svg viewBox="0 0 90 100" preserveAspectRatio="none">
+              <path class="ln" style="--d:0s" d="M2,50 L88,50" />
+            </svg>
+          </div>
+
+          <!-- 数据仓库 / 数据湖 -->
+          <div class="etl-lake">
+            <span class="lake-label">数据仓库</span>
+            <span class="lake-sub">湖仓一体</span>
+            <div class="lake-waves"><span></span><span></span><span></span></div>
+          </div>
+
+          <!-- 分支线：数据仓库 → 3 个应用 -->
+          <div class="etl-linkset etl-linkset-arrow">
+            <svg viewBox="0 0 90 264" preserveAspectRatio="none">
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#1f8a6d"/>
+                </marker>
+              </defs>
+<path class="ln dash" style="--d:0s"   d="M2,132 C42,132 52,79 88,79" />
+<path class="ln dash" style="--d:.35s" d="M2,132 C46,132 62,132 88,132" />
+<path class="ln dash" style="--d:.7s"  d="M2,132 C42,132 52,185 88,185" />
+            </svg>
+          </div>
+
+          <!-- 右侧应用 -->
+          <div class="etl-out">
+            <span class="out-node" style="--i:0">BI 报表</span>
+            <span class="out-node" style="--i:1">驾驶舱</span>
+            <span class="out-node" style="--i:2">移动端</span>
+          </div>
+        </div>
+
+        <div class="vs-points">
+          <div class="vsp"><strong>自动抽取</strong><span>5 套系统凌晨自动跑，零人工</span></div>
+          <div class="vsp"><strong>自动清洗</strong><span>去重补缺、统一口径</span></div>
+          <div class="vsp"><strong>自动出表</strong><span>财务/销售/运营一并就绪</span></div>
+        </div>
+        <div class="vs-result">月结 5 天 <em>→</em> <strong>2 小时</strong> · T+0 报表就绪</div>
+      </article>
+
+      <!-- 递进箭头 -->
+      <div class="value-arrow-down reveal" data-reveal">
+        <span>基座建好后，上层才能用 AI 问数</span>
+        <b>↓</b>
+      </div>
+
+      <!-- 第二步：AI 问数 -->
+      <article class="value-stage stage-ai reveal" data-reveal>
+        <div class="vs-head">
+          <span class="vs-step">STEP 2</span>
+          <h3>加入 AI 能力，自然语言问数（ChatBI）</h3>
+          <p class="vs-sub">数据基座搭好、业务数据全部就位后，再叠加 AI 能力 — 无需写代码，<strong>用大白话直接问</strong>，即刻获得数据、分析与建议。</p>
+        </div>
+        <div class="vs-points">
+          <div class="vsp"><strong>钉钉 / 企微 / 飞书</strong><span>直接打字问，无需打开 BI</span></div>
+          <div class="vsp"><strong>30 秒出答案</strong><span>图表 + 结论 + 异动原因</span></div>
+          <div class="vsp"><strong>不用学 SQL</strong><span>自然语言，谁都能问，即问即得</span></div>
+        </div>
+        <div class="vs-result">问数 半天 <em>→</em> <strong>30 秒</strong> · 数据开发被解放</div>
+
+        <!-- 过渡：能力说明 → 现场演示 -->
+        <div class="ai-bridge">
+          <span class="ai-bridge-line"></span>
+          <span class="ai-bridge-text">能力已经就位，下面看它<strong>真实跑一遍</strong></span>
+          <span class="ai-bridge-line"></span>
+        </div>
+
+        <!-- STEP 2 实战演示（同一张卡内） -->
+        <div class="ai-demo" id="ai-demo">
+          <div class="aid-head">
+            <span class="aid-badge">现场演示</span>
+            <h3>ChatBI 问数 · 真实过程</h3>
+            <p class="aid-sub">下面是真实系统的问数过程 — 无需动手，看着就好</p>
+          </div>
+
+      <div class="chatbi-stage chatbi-stage-lg">
+        <!-- 左：大对话窗口 -->
+        <div class="chatbi-card chatbi-card-lg">
+          <div class="cb-head">
+            <span class="cb-dot live"></span>
+            <span class="cb-title">ChatBI 问数 · 自动演示</span>
+            <span class="cb-tag">免登录</span>
+            <button type="button" class="cb-replay" id="cbReplay" title="重新播放演示" aria-label="重新播放演示">
+              <svg viewBox="0 0 24 24" width="14" height="14"><path d="M20 11a8 8 0 1 0-2.3 5.7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M20 5v6h-6" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="cb-replay-text">重播</span>
+            </button>
+          </div>
+          <div class="cb-body cb-body-lg" id="cbBody">
+            <div class="cb-msg bot">
+              <span class="cb-avatar">🤖</span>
+              <div class="cb-bubble">
+                您好，我是您的数据助手。<br>
+                想了解业务，直接在下方对话框里用自然语言问我即可 ——<br>
+                <strong>我会自动完成：查数 → 分析 → 回答</strong> 👇
+              </div>
+            </div>
+          </div>
+            <div class="cb-presets" id="cbPresets">
+              
+              <button type="button" class="cb-preset" data-q="分析一下我们原材料采购的价格竞争力？">原材料价格竞争力</button>
+              <button type="button" class="cb-preset" data-q="给我们一些采购渠道优化建议">采购渠道优化</button>
+            </div>
+            <form class="cb-input" id="cbForm">
+              <input type="text" id="cbInput" placeholder="用大白话问，比如：哪些原材料有降价空间？（可点击上方快速填入）" autocomplete="off">
+            <button type="submit" aria-label="发送">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 12 L21 4 L13 21 L11 13 L3 12 Z" fill="currentColor"/></svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- 右：引导 + 能力 -->
+        <div class="chatbi-side chatbi-side-lg">
+          <div class="cb-side-ask">
+            <span class="cb-side-label">您只需提一个业务问题</span>
+            <p>AI 自动查数 - 分析 - 回答，无需写 SQL、无需等排期</p>
+          </div>
+          <h3>AI 会帮你完成 4 步</h3>
+          <ul class="chatbi-features">
+            <li>
+              <span class="cf-icon">🧠</span>
+              <div>
+                <strong>① 深度思考</strong>
+                <p>理解问题、拆解分析维度</p>
+              </div>
+            </li>
+            <li>
+              <span class="cf-icon">🔎</span>
+              <div>
+                <strong>② 自动查数</strong>
+                <p>从数据仓库实时取数</p>
+              </div>
+            </li>
+            <li>
+              <span class="cf-icon">📊</span>
+              <div>
+                <strong>③ 生成图表</strong>
+                <p>柱状 / 折线 / 表格自动选</p>
+              </div>
+            </li>
+            <li>
+              <span class="cf-icon">💡</span>
+              <div>
+                <strong>④ 给结论建议</strong>
+                <p>洞察 + 下一步行动</p>
+              </div>
+            </li>
+          </ul>
+          <div class="cb-side-note">钉钉 / 企微 / 飞书 均可直接使用 · 约 30 秒出结果</div>
+        </div>
+      </div>
+        </div><!-- /.ai-demo -->
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 4. 案例展示（含驾驶舱/移动端/损益模型） ============== -->
+<section class="section" id="cases">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <span class="kicker">客户案例</span>
+      <h2 class="section-title">看我们怎么帮客户把数据用起来</h2>
+      <p class="section-lead">驾驶舱大屏、移动端报表、财务分析、AI 助手 — 真实系统实录，点击即可看动态演示</p>
+    </div>
+
+    <!-- 案例标签切换 -->
+    <div class="case-tabs reveal" data-reveal>
+      <button class="ct-tab active" data-tab="all">全部</button>
+      <button class="ct-tab" data-tab="cockpit">BI 驾驶舱</button>
+      <button class="ct-tab" data-tab="mobile">移动端</button>
+      <button class="ct-tab" data-tab="dashboard">仪表板</button>
+      <button class="ct-tab" data-tab="ai">AI 助手</button>
+    </div>
+
+    <div class="case-grid case-grid-6" id="caseGrid">
+      <!-- 1. 物流中心运营监控大屏（左上 · 动图） -->
+      <article class="case-card js-case" data-cat="cockpit"
+        data-title="物流中心运营监控大屏"
+        data-tags='["物流仓储","BI 驾驶舱","真实案例"]'
+        data-gallery='["assets/cockpit-live.gif"]'
+        data-animated="1"
+        data-lead="仓库态势 3D 可视化 + 业务监控 + 视频联动 + 自动化立库运营 — 一个屏管一座仓。上方为真实系统动态演示（约 12 秒循环）。"
+        data-points='["3D 仓库态势：实时显示库区、托盘、入库/出库箱数","运输/客户/里程排行，榜单一目了然","仓储库存 + 视频监控 + 立库运营同屏呈现","支持大屏投屏，办公室常态轮播"]'
+        data-metric='一个屏 · 管一座仓'
+        data-live="https://bi.aliyuncs.com/t/VbIjUb"
+        data-live-title="物流中心运营监控大屏">
+        <div class="case-img case-img-thumb">
+          <img src="assets/case-cockpit-cover.webp" alt="物流中心运营监控大屏" loading="lazy">
+          <span class="case-gif-badge">▶ 动图演示</span>
+          <span class="case-zoom">🔍 点击查看详情</span>
+        </div>
+        <div class="case-info">
+          <div class="case-meta">
+            <span class="case-tag">物流仓储</span>
+            <span class="case-tag">驾驶舱</span>
+            <span class="case-tag real">行业案例</span>
+          </div>
+          <h3>物流中心运营监控大屏</h3>
+          <p>3D 仓库 + 业务监控 + 视频联动 — <strong>一个屏管一座仓</strong>。</p>
+          <span class="case-cta">查看案例详情 →</span>
+        </div>
+      </article>
+
+      <!-- 2. 信息可视化案例库（右上 · 静态） -->
+      <article class="case-card js-case" data-cat="dashboard"
+        data-title="信息可视化案例库"
+        data-tags='["信息可视化","数据故事","真实案例"]'
+        data-gallery='["assets/case-infographic.webp"]'
+        data-lead="把抽象数据做成看得懂的故事 — 一屏一个主题，用图形、地图、图标卡片讲清业务发现。"
+        data-points='["六大主题卡片：游戏偏好 / 降雨 / 森林面积 / AI 应用 / 水资源 / 世界人口","数据与图文混排，图表 + 结论 + 数据来源一体化","模板化生产，业务场景可快速替换复用"]'
+        data-metric='一屏一个主题 · 数据会讲故事'>
+        <div class="case-img case-img-thumb case-img-contain">
+          <img src="assets/case-infographic.webp" alt="信息可视化案例库" loading="lazy">
+          <span class="case-zoom">🔍 点击查看详情</span>
+        </div>
+        <div class="case-info">
+          <div class="case-meta">
+            <span class="case-tag">信息可视化</span>
+            <span class="case-tag real">行业案例</span>
+          </div>
+          <h3>信息可视化案例库</h3>
+          <p>图表 + 图标 + 地图，<strong>把数据讲成故事</strong>。</p>
+          <span class="case-cta">查看案例详情 →</span>
+        </div>
+      </article>
+
+      <!-- 3. 运营分析移动端（左下） -->
+      <article class="case-card js-case" data-cat="mobile"
+        data-title="运营分析移动端 · 4 张实战"
+        data-tags='["运营 / SaaS","移动端","真实案例"]'
+        data-cover="assets/mobile-1-okr.webp"
+        data-gallery='["assets/mobile-1-okr.webp","assets/mobile-2-marketing.webp","assets/mobile-3-manager.webp","assets/mobile-4-analysis.webp"]'
+        data-gallery-labels='["OKR 追踪","营销分析","高层管理者看板","经营分析"]'
+        data-lead="覆盖 OKR 追踪、营销分析、高层看板、经营分析 — 钉钉/企微/飞书嵌入即用，通勤路上 30 秒看完关键指标。"
+        data-points='["OKR 追踪：拉新/低活/活跃/忠诚用户分层 + MAU 目标进度","营销分析：DAU 走势 + 主站/小程序/Future 站多维拆解","高层看板：年度 KPI 进度 + 月度指标 + 大区销售","经营分析：销售/毛利走势 + 办事处排行，支持下钻","真实样例：DAU 2.55万、销售 432.7万、毛利 4.7%"]'
+        data-metric='30 秒 · 通勤看完全局'>
+        <div class="case-img case-img-mobile">
+          <div class="mob"><img src="assets/mobile-1-okr.webp" alt="OKR 追踪" loading="lazy"></div>
+          <div class="mob"><img src="assets/mobile-2-marketing.webp" alt="营销分析" loading="lazy"></div>
+          <div class="mob"><img src="assets/mobile-3-manager.webp" alt="高层看板" loading="lazy"></div>
+          <div class="mob"><img src="assets/mobile-4-analysis.webp" alt="经营分析" loading="lazy"></div>
+          <div class="mob-badges">
+            <span class="mb-count">4 图</span>
+            <span class="mb-tip">点击查看大图 →</span>
+          </div>
+        </div>
+        <div class="case-info">
+          <div class="case-meta">
+            <span class="case-tag">运营 / SaaS</span>
+            <span class="case-tag">移动端</span>
+            <span class="case-tag real">行业案例</span>
+          </div>
+          <h3>运营分析移动端 · 4 张实战</h3>
+          <p>OKR / 营销 / 高层看板 / 经营分析 — <strong>手机里随时看</strong>。</p>
+          <span class="case-cta">查看案例详情 →</span>
+        </div>
+      </article>
+
+      <!-- 4. 财务经营分析报告（右下 · 动图） -->
+      <article class="case-card js-case" data-cat="dashboard"
+        data-title="财务经营分析报告"
+        data-tags='["连锁餐饮","财务分析","真实案例"]'
+        data-gallery='["assets/case-report.gif"]'
+        data-animated="1"
+        data-lead="核心指标 + 经营漏斗 + 订单排行 + 利润表四联动，一页看清门店经营全貌。"
+        data-points='["核心指标卡：含销售额、销售收入、毛利额，含预算达成进度环","经营漏斗：含税销售额 → 不含税 → 毛利 → 净利润逐层转化","订单排行：按子订单号维度排序，随时切换查看","经营利润表：2019 vs 2020 逐项对比，含变动列"]'
+        data-metric='核心指标 · 漏斗 · 排行 · 利润表'>
+        <div class="case-img case-img-thumb">
+          <img src="assets/case-report-cover.webp" alt="财务经营分析报告" loading="lazy">
+          <span class="case-gif-badge">▶ 动图演示</span>
+          <span class="case-zoom">🔍 点击查看详情</span>
+        </div>
+        <div class="case-info">
+          <div class="case-meta">
+            <span class="case-tag">连锁餐饮</span>
+            <span class="case-tag">财务分析</span>
+            <span class="case-tag real">行业案例</span>
+          </div>
+          <h3>财务经营分析报告</h3>
+          <p>核心指标 + 经营漏斗 + 利润表，<strong>财务口径一页看清</strong>。</p>
+          <span class="case-cta">查看案例详情 →</span>
+        </div>
+      </article>
+
+      <!-- 5. 店长经营助手（动图） -->
+      <article class="case-card js-case" data-cat="ai"
+        data-title="店长经营助手"
+        data-tags='["连锁零售","AI 助手","真实案例"]'
+        data-gallery='["assets/case-manager.gif"]'
+        data-animated="1"
+        data-lead="店长的智能小助手 — 数据概览 + 与标杆门店对比 + 近期任务 + AI 对话答疑，一个页面管好门店。"
+        data-points='["数据概览：销售额 / 毛利率 / 复购率 / 坪效四项核心指标月环比","标杆对比：雷达图对比同类型标杆门店，快速定位短板","近期任务：陈列/培训/复购等任务清单，状态一目了然","AI 对话：直接问「哪些促销动作对销售额提升最有效」，即时出建议"]'
+        data-metric='AI 小助手 · 店长随身带'>
+        <div class="case-img case-img-thumb">
+          <img src="assets/case-manager-cover.webp" alt="店长经营助手" loading="lazy">
+          <span class="case-gif-badge">▶ 动图演示</span>
+          <span class="case-zoom">🔍 点击查看详情</span>
+        </div>
+        <div class="case-info">
+          <div class="case-meta">
+            <span class="case-tag">连锁零售</span>
+            <span class="case-tag">AI 助手</span>
+            <span class="case-tag real">行业案例</span>
+          </div>
+          <h3>店长经营助手</h3>
+          <p>数据概览 + 标杆对比 + AI 答疑，<strong>店长随身带</strong>。</p>
+          <span class="case-cta">查看案例详情 →</span>
+        </div>
+      </article>
+
+      <!-- 6. 客户满意度分析（动图） -->
+      <article class="case-card js-case" data-cat="ai"
+        data-title="客户满意度分析"
+        data-tags='["电商 / B端","满意度分析","真实案例"]'
+        data-gallery='["assets/case-satisfaction.gif"]'
+        data-animated="1"
+        data-lead="聚焦 B 端客户与电商客户的满意度调查结果，深入分析客户满意度构成与关键影响因素。"
+        data-points='["核心洞察：B端客户投诉率 12.89%（主因交货延迟）、电商好评率 97.98%","分渠道拆解：电商客户 / B端客户双视角切换","客户投诉量与投诉率月度趋势","支持按销售渠道、销售部门多维度筛选下钻"]'
+        data-metric='满意度 · 投诉 · 归因全链路'>
+        <div class="case-img case-img-thumb">
+          <img src="assets/case-satisfaction-cover.webp" alt="客户满意度分析" loading="lazy">
+          <span class="case-gif-badge">▶ 动图演示</span>
+          <span class="case-zoom">🔍 点击查看详情</span>
+        </div>
+        <div class="case-info">
+          <div class="case-meta">
+            <span class="case-tag">电商 / B端</span>
+            <span class="case-tag">满意度分析</span>
+            <span class="case-tag real">行业案例</span>
+          </div>
+          <h3>客户满意度分析</h3>
+          <p>投诉/好评/满意度，<strong>全链路归因分析</strong>。</p>
+          <span class="case-cta">查看案例详情 →</span>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== 5. ChatBI 独立模块 ============== -->
+
+
+<!-- ============== 6. 交付流程（3 阶段） ============== -->
+<section class="section" id="process">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <span class="kicker">交付流程</span>
+      <h2 class="section-title">3 个阶段，从数据沉睡到驱动决策</h2>
+      <p class="section-lead">明确的三段式交付 — 每段都有清晰成果</p>
+    </div>
+
+    <ol class="process-h">
+      <li class="ph-card reveal" data-reveal>
+        <div class="ph-top">
+          <span class="ph-num">1</span>
+          <span class="ph-tag">阶段一</span>
+        </div>
+        <h3>数据基座搭建</h3>
+        <p>数仓 + ETL + 任务调度，让数据自动流转、自动计算</p>
+        <ul>
+          <li>业务系统数据接入 / 字段映射</li>
+          <li>数仓分层建模（ODS → DWS → ADS）</li>
+          <li>ETL 调度（DolphinScheduler）</li>
+          <li class="ph-deliver">交付物：数仓上线 + 核心指标就绪</li>
+        </ul>
+      </li>
+      <li class="ph-arrow" aria-hidden="true">→</li>
+      <li class="ph-card reveal" data-reveal>
+        <div class="ph-top">
+          <span class="ph-num">2</span>
+          <span class="ph-tag">阶段二</span>
+        </div>
+        <h3>报表搭建</h3>
+        <p>仪表板 + 驾驶舱 + 移动端，让数据看得见、用得着</p>
+        <ul>
+          <li>多维分析仪表板（切片/钻取）</li>
+          <li>BI 经营驾驶舱（大屏投屏）</li>
+          <li>移动端报表（钉钉/企微嵌入）</li>
+          <li class="ph-deliver">交付物：10-30 张报表 + 1 套驾驶舱</li>
+        </ul>
+      </li>
+      <li class="ph-arrow" aria-hidden="true">→</li>
+      <li class="ph-card ph-last reveal" data-reveal>
+        <div class="ph-top">
+          <span class="ph-num">3</span>
+          <span class="ph-tag">阶段三</span>
+        </div>
+        <h3>分析应用</h3>
+        <p>ChatBI 问数 + AI 智能体，让数据会说话、能行动</p>
+        <ul>
+          <li>ChatBI 自然语言问数</li>
+          <li>AI 周报 / 月报自动生成</li>
+          <li>异常预警 + 智能归因</li>
+          <li class="ph-deliver">交付物：ChatBI 上线 + 运营支持</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============== 7. 联系（加行业+企业规模） ============== -->
+<section class="section section-contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <span class="kicker">联系我们</span>
+      <h2 class="section-title">先聊 30 分钟，看看我们能帮您做什么</h2>
+      <p class="section-lead">首次沟通免费 — 告诉我们您的行业与规模，给您更精准的方案与报价</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal" data-reveal>
+        <h3>直接联系</h3>
+        <ul class="contact-list">
+          <li>
+            <span class="cl-icon">📱</span>
+            <div>
+              <strong>钉钉</strong>
+              <span>手机号 15175796626</span>
+              <a href="dingtalk://dingtalkclient/action/sendMessage?target=15175796626" class="cl-link">钉钉内发起 →</a>
+            </div>
+          </li>
+          <li>
+            <span class="cl-icon">✉</span>
+            <div>
+              <strong>邮箱</strong>
+              <span id="emailText">976407556@qq.com</span>
+              <button type="button" class="cl-link" id="copyEmail">复制邮箱</button>
+            </div>
+          </li>
+          <li>
+            <span class="cl-icon">🕒</span>
+            <div>
+              <strong>服务时间</strong>
+              <span>工作日 09:00 - 21:00</span>
+              <span>周末预约制</span>
+            </div>
+          </li>
+        </ul>
+
+        
+      </div>
+
+      <div class="contact-form-wrap reveal" data-reveal>
+        <form class="contact-form" id="contactForm" novalidate onsubmit="return handleSubmit(event)">
+          <h3>简单留言</h3>
+          <p class="form-hint">全部选填，写一句您关心的问题即可，我们会在 1 个工作日内回复</p>
+          <label>
+            <span>您的称呼</span>
+            <input type="text" name="name" placeholder="如：李总 / 王经理">
+          </label>
+          <label>
+            <span>联系方式</span>
+            <input type="text" name="contact" placeholder="手机号或邮箱，方便我们回复您">
+          </label>
+          <div class="form-row">
+            <label>
+              <span>所在行业</span>
+              <select name="industry">
+                <option value="">不填</option>
+                <option>团餐 / 校餐</option>
+                <option>连锁餐饮</option>
+                <option>零售连锁</option>
+                <option>制造业</option>
+                <option>教育培训</option>
+                <option>专业服务</option>
+                <option>其他</option>
+              </select>
+            </label>
+            <label>
+              <span>企业规模</span>
+              <select name="scale">
+                <option value="">不填</option>
+                <option>10 人以下</option>
+                <option>10-50 人</option>
+                <option>50-200 人</option>
+                <option>200-1000 人</option>
+                <option>1000 人以上</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            <span>您想解决的问题</span>
+            <textarea name="msg" rows="4" placeholder="例如：5 套业务系统数据要打通，还要能随时问数"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary" id="formSubmit">提交留言</button>
+          <p class="form-tip">提交后我会通过钉钉或邮箱尽快回复您 — 信息仅用于沟通</p>
+          <p class="form-ok" id="formOk" hidden>✓ 已收到留言，我会尽快联系您！</p>
+          <p class="form-err" id="formErr" hidden>提交失败，请稍后重试或直接加我钉钉</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark">
+        <svg viewBox="0 0 32 32" width="24" height="24"><rect width="32" height="32" rx="6" fill="#1a5fb8"/><path d="M8 20 L14 14 L18 18 L24 12" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="12" r="2" fill="white"/></svg>
+      </span>
+      <div>
+        <strong>数智化团队</strong>
+        <span>多年业务一线 · 让数据真正驱动经营决策</span>
+      </div>
+    </div>
+    <nav class="footer-links">
+      <a href="#pain">行业痛点</a>
+      <a href="#value">我们能做什么</a>
+      <a href="#cases">案例展示</a>
+      <a href="#ai-demo">ChatBI 演示</a>
+    </nav>
+    <div class="footer-meta">
+      <span>© <span id="year"></span> 数智化团队</span>
+    </div>
+  </div>
+</footer>
+
+<!-- 案例详情全屏层（FLIP 卡片放大，上图下文） -->
+<div class="case-detail" id="caseDetail" aria-hidden="true">
+  <button class="cd-close" id="cdClose" aria-label="关闭">×</button>
+  <div class="cd-panel" id="cdPanel">
+    <div class="cd-media" id="cdMedia"></div>
+    <div class="cd-body">
+      <div class="cd-meta" id="cdMeta"></div>
+      <h2 class="cd-title" id="cdTitle"></h2>
+      <p class="cd-lead" id="cdLead"></p>
+      <div class="cd-metric" id="cdMetric"></div>
+      <ul class="cd-points" id="cdPoints"></ul>
+      <a class="cd-live-link" id="cdLiveLink" href="#" target="_blank" rel="noopener">
+        <span class="cdll-icon">↗</span>
+        <span class="cdll-text"><strong id="cdLiveTitle">在线打开真实大屏</strong><em>在 QuickBI 中全屏查看 · 新窗口打开</em></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
