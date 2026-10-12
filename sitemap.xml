@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://data-dev-site.app.workbuddy.host/</loc>
+    <loc>https://idatai.cn/</loc>
     <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://data-dev-site.app.workbuddy.host/#pain</loc>
+    <loc>https://idatai.cn/#pain</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data-dev-site.app.workbuddy.host/#value</loc>
+    <loc>https://idatai.cn/#value</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://data-dev-site.app.workbuddy.host/#cases</loc>
+    <loc>https://idatai.cn/#cases</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data-dev-site.app.workbuddy.host/#ai-demo</loc>
+    <loc>https://idatai.cn/#ai-demo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://data-dev-site.app.workbuddy.host/#contact</loc>
+    <loc>https://idatai.cn/#contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
