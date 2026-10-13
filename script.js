@@ -615,13 +615,21 @@
       cdMedia.classList.add('cd-empty');
       cdMedia.innerHTML = '<div class="cd-empty-icon">🖼️</div><div>该案例截图待补充，详情见下方说明</div>';
     } else if (gallery.length === 1) {
-      cdMedia.innerHTML = `<img src="${gallery[0]}" alt="${title}">`;
+      const src = gallery[0];
+      if (src.endsWith('.mp4')) {
+        cdMedia.innerHTML = `<video src="${src}" controls autoplay muted loop playsinline style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+      } else {
+        cdMedia.innerHTML = `<img src="${src}" alt="${title}">`;
+      }
     } else {
       cdMedia.classList.add('cd-multi');
       const labels = parseJson(card.dataset.galleryLabels, []);
-      cdMedia.innerHTML = gallery.map((src, i) =>
-        `<img src="${src}" alt="${labels[i] || title + ' ' + (i+1)}">`
-      ).join('');
+      cdMedia.innerHTML = gallery.map((src, i) => {
+        if (src.endsWith('.mp4')) {
+          return `<video src="${src}" controls muted loop playsinline style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+        }
+        return `<img src="${src}" alt="${labels[i] || title + ' ' + (i+1)}">`;
+      }).join('');
     }
 
     // 记录源卡片位置
