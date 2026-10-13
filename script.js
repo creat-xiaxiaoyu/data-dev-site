@@ -611,7 +611,23 @@
     // 填充媒体
     cdMedia.className = 'cd-media';
     cdMedia.innerHTML = '';
-    if (gallery.length === 0) {
+    
+    // 如果 gallery 为空 + data-animated="1"，从 data-title 推断 MP4
+    let mp4Src = null;
+    if (gallery.length === 0 && card.dataset.animated === '1') {
+      const titleMap = {
+        '物流中心运营监控大屏': 'https://idatai.cn/assets/cockpit-live.mp4',
+        '财务经营分析报告': 'https://idatai.cn/assets/case-report.mp4',
+        '店长经营助手': 'https://idatai.cn/assets/case-manager.mp4',
+        '客户满意度分析': 'https://idatai.cn/assets/case-satisfaction.mp4',
+      };
+      mp4Src = titleMap[title] || null;
+    }
+    
+    if (mp4Src) {
+      // 有 MP4 推断路径
+      cdMedia.innerHTML = `<video src="${mp4Src}" controls autoplay muted loop playsinline style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+    } else if (gallery.length === 0) {
       cdMedia.classList.add('cd-empty');
       cdMedia.innerHTML = '<div class="cd-empty-icon">🖼️</div><div>该案例截图待补充，详情见下方说明</div>';
     } else if (gallery.length === 1) {
