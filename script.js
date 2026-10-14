@@ -467,6 +467,8 @@
     if (demoRunning) return;
     demoRunning = true;
     if (cbReplay) cbReplay.classList.add('playing');
+    // 清空对话区（防重复）
+    if (cbBody) cbBody.innerHTML = '';
     cbResetDemo();
     await sleep(700);
     for (const q of DEMO_QUESTIONS) {
