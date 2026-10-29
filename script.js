@@ -617,6 +617,13 @@
     
     // 如果 gallery 为空 + data-animated="1"，从 data-title 推断 MP4
     let mp4Src = null;
+    let mp4Poster = null;
+    const posterMap = {
+      '物流中心运营监控大屏': 'assets/cockpit-live-poster.jpg',
+      '财务经营分析报告': 'assets/case-report-poster.jpg',
+      '店长经营助手': 'assets/case-manager-poster.jpg',
+      '客户满意度分析': 'assets/case-satisfaction-poster.jpg',
+    };
     if (gallery.length === 0 && card.dataset.animated === '1') {
       const titleMap = {
         '物流中心运营监控大屏': 'assets/cockpit-live-web.mp4',
@@ -624,14 +631,8 @@
         '店长经营助手': 'assets/case-manager-web.mp4',
         '客户满意度分析': 'assets/case-satisfaction-web.mp4',
       };
-      const posterMap = {
-        '物流中心运营监控大屏': 'assets/cockpit-live-poster.jpg',
-        '财务经营分析报告': 'assets/case-report-poster.jpg',
-        '店长经营助手': 'assets/case-manager-poster.jpg',
-        '客户满意度分析': 'assets/case-satisfaction-poster.jpg',
-      };
       mp4Src = titleMap[title] || null;
-      var mp4Poster = posterMap[title] || null;
+      mp4Poster = posterMap[title] || null;
     }
     
     if (mp4Src) {
@@ -644,7 +645,8 @@
     } else if (gallery.length === 1) {
       const src = gallery[0];
       if (src.endsWith('.mp4')) {
-        const poster = src.replace('-web.mp4', '-poster.jpg');
+        // poster 用 posterMap 兜底，没有就从 src 推断
+        const poster = posterMap[title] || src.replace('-web.mp4', '-poster.jpg');
         cdMedia.innerHTML = `<video src="${src}" poster="${poster}" controls autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
       } else {
         cdMedia.innerHTML = `<img src="${src}" alt="${title}">`;
@@ -654,7 +656,7 @@
       const labels = parseJson(card.dataset.galleryLabels, []);
       cdMedia.innerHTML = gallery.map((src, i) => {
         if (src.endsWith('.mp4')) {
-          const poster = src.replace('-web.mp4', '-poster.jpg');
+          const poster = posterMap[title] || src.replace('-web.mp4', '-poster.jpg');
           return `<video src="${src}" poster="${poster}" controls muted loop playsinline preload="metadata" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
         }
         return `<img src="${src}" alt="${labels[i] || title + ' ' + (i+1)}">`;
