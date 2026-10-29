@@ -619,24 +619,33 @@
     let mp4Src = null;
     if (gallery.length === 0 && card.dataset.animated === '1') {
       const titleMap = {
-        '物流中心运营监控大屏': 'https://idatai.cn/assets/cockpit-live.mp4',
-        '财务经营分析报告': 'https://idatai.cn/assets/case-report.mp4',
-        '店长经营助手': 'https://idatai.cn/assets/case-manager.mp4',
-        '客户满意度分析': 'https://idatai.cn/assets/case-satisfaction.mp4',
+        '物流中心运营监控大屏': 'assets/cockpit-live-web.mp4',
+        '财务经营分析报告': 'assets/case-report-web.mp4',
+        '店长经营助手': 'assets/case-manager-web.mp4',
+        '客户满意度分析': 'assets/case-satisfaction-web.mp4',
+      };
+      const posterMap = {
+        '物流中心运营监控大屏': 'assets/cockpit-live-poster.jpg',
+        '财务经营分析报告': 'assets/case-report-poster.jpg',
+        '店长经营助手': 'assets/case-manager-poster.jpg',
+        '客户满意度分析': 'assets/case-satisfaction-poster.jpg',
       };
       mp4Src = titleMap[title] || null;
+      var mp4Poster = posterMap[title] || null;
     }
     
     if (mp4Src) {
       // 有 MP4 推断路径
-      cdMedia.innerHTML = `<video src="${mp4Src}" controls autoplay muted loop playsinline style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+      const posterAttr = mp4Poster ? ` poster="${mp4Poster}"` : '';
+      cdMedia.innerHTML = `<video src="${mp4Src}"${posterAttr} controls autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
     } else if (gallery.length === 0) {
       cdMedia.classList.add('cd-empty');
       cdMedia.innerHTML = '<div class="cd-empty-icon">🖼️</div><div>该案例截图待补充，详情见下方说明</div>';
     } else if (gallery.length === 1) {
       const src = gallery[0];
       if (src.endsWith('.mp4')) {
-        cdMedia.innerHTML = `<video src="${src}" controls autoplay muted loop playsinline style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+        const poster = src.replace('-web.mp4', '-poster.jpg');
+        cdMedia.innerHTML = `<video src="${src}" poster="${poster}" controls autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
       } else {
         cdMedia.innerHTML = `<img src="${src}" alt="${title}">`;
       }
@@ -645,7 +654,8 @@
       const labels = parseJson(card.dataset.galleryLabels, []);
       cdMedia.innerHTML = gallery.map((src, i) => {
         if (src.endsWith('.mp4')) {
-          return `<video src="${src}" controls muted loop playsinline style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+          const poster = src.replace('-web.mp4', '-poster.jpg');
+          return `<video src="${src}" poster="${poster}" controls muted loop playsinline preload="metadata" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
         }
         return `<img src="${src}" alt="${labels[i] || title + ' ' + (i+1)}">`;
       }).join('');
