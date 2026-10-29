@@ -647,7 +647,7 @@
       if (src.endsWith('.mp4')) {
         // poster 用 posterMap 兜底，没有就从 src 推断
         const poster = posterMap[title] || src.replace('-web.mp4', '-poster.jpg');
-        cdMedia.innerHTML = `<video src="${src}" poster="${poster}" controls autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+        cdMedia.innerHTML = `<video src="${src}" poster="${poster}" controls autoplay muted loop playsinline preload="auto" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
       } else {
         cdMedia.innerHTML = `<img src="${src}" alt="${title}">`;
       }
@@ -657,7 +657,7 @@
       cdMedia.innerHTML = gallery.map((src, i) => {
         if (src.endsWith('.mp4')) {
           const poster = posterMap[title] || src.replace('-web.mp4', '-poster.jpg');
-          return `<video src="${src}" poster="${poster}" controls muted loop playsinline preload="metadata" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
+          return `<video src="${src}" poster="${poster}" controls muted loop playsinline preload="auto" style="width:100%;border-radius:8px;display:block;background:#000"></video>`;
         }
         return `<img src="${src}" alt="${labels[i] || title + ' ' + (i+1)}">`;
       }).join('');
